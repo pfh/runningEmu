@@ -31,16 +31,19 @@ There are 3 functions to be optimized in this package.
 Below are the runtimes for one evaluation of these functions
 
 ```{r}
-m <- matrix(rnorm(1e8), nrow=1e4)
+bigM <- 1e6
+m <- matrix(rnorm(bigM), nrow=as.integer(sqrt(bigM)))
 bench::system_time(un(m))
-bench::system_time(deux())
-bench::system_time(trois())
+v <- sample(1:10, bigM, replace=TRUE)
+bench::system_time(deux(v))
+vv <- sample(1:10, bigM, replace=TRUE, prob=sample(seq(0.1,0.9,by=0.1), 10, replace = TRUE))
+bench::system_time(trois(vv))
 ```
 
 And here are the runtimes for 50 evaluations of these functions.
 
 ```{r}
-bench::mark(un(m), iterations = 50)
-bench::mark(deux(), iterations = 50)
-bench::mark(trois(), iterations = 50)
+bench::mark(un(m), iterations = 10)
+bench::mark(deux(v), iterations = 10)
+bench::mark(trois(vv), iterations = 10)
 ```
