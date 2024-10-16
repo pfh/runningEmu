@@ -1,0 +1,13 @@
+Package: runningEmu
+Title: Emus Run Fast, So Should This Package
+Version: 0.0.0.9000
+Authors@R: 
+    person("Janith", "Wanniarachchi", , "janith.wanniarachchi@monash.edu", role = c("aut", "cre"))
+Description: An example package used to demonstrate optimizing function performance in R.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

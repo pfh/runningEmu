@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# runningEmu
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+```{r}
+library(runningEmu)
+```
+
+The goal of runningEmu is to create an environment for a Hacky Hour competition
+
+## Example
+
+There are 3 functions to be optimized in this package.
+
+Below are the runtimes for one evaluation of these functions
+
+```{r}
+m <- matrix(rnorm(1e8), nrow=1e4)
+bench::system_time(un(m))
+bench::system_time(deux())
+bench::system_time(trois())
+```
+
+And here are the runtimes for 50 evaluations of these functions.
+
+```{r}
+bench::mark(un(m), iterations = 50)
+bench::mark(deux(), iterations = 50)
+bench::mark(trois(), iterations = 50)
+```
