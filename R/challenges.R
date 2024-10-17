@@ -9,8 +9,11 @@
 #' un(m)
 #' @export
 un <- function(m) {
-  #mean(apply(m,1,mean) + apply(m,2,mean))
-  mean(m*2)
+  mean(m)*2
+}
+
+un_old <- function(m) {
+  mean(apply(m,1,mean) + apply(m,2,mean))
 }
 
 #' @title Second
@@ -21,6 +24,22 @@ un <- function(m) {
 #' @return A numerical vector containing the longest continuous increasing subset
 #' @export
 deux <- function(vec) {
+    best_i <- 1
+    best_j <- 1
+    i <- 1
+    for(j in 2:length(vec)) {
+        if (vec[j] <= vec[j-1]) 
+            i <- j
+        if (j-i > best_j-best_i) {
+            best_i <- i
+            best_j <- j
+        }
+    }
+    vec[best_i:best_j]
+}
+
+#' @export
+deux_old <- function(vec) {
   longest_seq <- c(vec[1])  # Longest increasing subsequence found
   current_seq <- c(vec[1])  # Current increasing subsequence
 
