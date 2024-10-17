@@ -9,7 +9,8 @@
 #' un(m)
 #' @export
 un <- function(m) {
-  mean(apply(m,1,mean) + apply(m,2,mean))
+  #mean(apply(m,1,mean) + apply(m,2,mean))
+  mean(m*2)
 }
 
 #' @title Second
