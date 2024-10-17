@@ -23,13 +23,31 @@ un_old <- function(m) {
 #' @param vec Numerical vector with no missing values
 #' @return A numerical vector containing the longest continuous increasing subset
 #' @export
-deux <- function(vec) {
+Rcpp::cppFunction('NumericVector deux(NumericVector x) {
+  int n = x.size();
+  int best_i=0, best_j=0, i=0, j;
+  for(j=1;j<n;j++) {
+    if (x[j] <= x[j-1]) i=j;
+    if (j-i > best_j-best_i) {
+        best_i = i;
+        best_j = j;
+    }
+  }
+  NumericVector out(best_j-best_i+1);
+  for(i=0,j=best_i;j<=best_j;i++,j++)
+     out[i] = x[j];
+  return out;
+}')
+
+#' @export
+deux_better <- function(vec) {
     best_i <- 1
     best_j <- 1
     i <- 1
     for(j in 2:length(vec)) {
-        if (vec[j] <= vec[j-1]) 
+        if (vec[j] <= vec[j-1]) {
             i <- j
+        }
         if (j-i > best_j-best_i) {
             best_i <- i
             best_j <- j
